@@ -3,7 +3,7 @@ import { ref, set, push, child, remove, get, onChildAdded, onChildChanged, onChi
 import { v4 as uuidv4 } from 'uuid';
 import { getDocs } from 'firebase/firestore';
 import { async } from '@firebase/util';
-import { getAuth, connectAuthEmulator, signInWithEmailAndPassword, createUserWithEmailAndPassword} from 'firebase/auth';
+import { getAuth, connectAuthEmulator, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile} from 'firebase/auth';
 
 export const signUp = async function (req,res){
     const {password, email, username} = req.body;
