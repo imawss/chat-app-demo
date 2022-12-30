@@ -1,6 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
-import{getAllUsers, getUserById, createUser, deleteUser, getLoginDatas,signUp} from "../controllers/userController.js"
+import{signUp} from "../controllers/userController.js"
 
 const userRoute = express.Router();
 
