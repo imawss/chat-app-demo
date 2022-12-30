@@ -7,6 +7,7 @@ import { getAuth, connectAuthEmulator, signInWithEmailAndPassword, createUserWit
 
 export const signUp = async function (req,res){
     const {password, email} = req.body;
+    
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
