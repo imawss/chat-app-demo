@@ -6,16 +6,24 @@ import { async } from '@firebase/util';
 import { getAuth, connectAuthEmulator, signInWithEmailAndPassword, createUserWithEmailAndPassword} from 'firebase/auth';
 
 export const signUp = async function (req,res){
-    const {password, email} = req.body;
-    
+    const {password, email, username} = req.body;
+    const data = {
+      "password":password,
+      "username":username,
+      "email":email
+  }
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
+      const userId = ref(database, user.uid);
+      set(userId, data);
+      res.send("A new user added!");
       console.log(user);
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
+      res.send(errorCode + " " + errorMessage);
     });
 }
 
