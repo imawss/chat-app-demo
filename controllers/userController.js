@@ -1,21 +1,29 @@
-import {dbRef,database, auth} from '../dataAccess/firebaseConfig.js';
-import { ref, set, push, child, remove, get, onChildAdded, onChildChanged, onChildRemoved} from 'firebase/database';
+import { dbRef, database, auth } from '../dataAccess/firebaseConfig.js';
+import { ref, set, push, child, remove, get, onChildAdded, onChildChanged, onChildRemoved } from 'firebase/database';
 import { v4 as uuidv4 } from 'uuid';
 import { getDocs } from 'firebase/firestore';
 import { async } from '@firebase/util';
-import { getAuth, connectAuthEmulator, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile} from 'firebase/auth';
+import { getAuth, connectAuthEmulator, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 
-export const signUp = async function (req,res){
-    const {password, email, username} = req.body;
-    const data = {
-      "password":password,
-      "username":username,
-      "email":email
-  }
-    createUserWithEmailAndPassword(auth, email, password)
+export const signUp = async function (req, res) {
+  const { password, email, username, photoUrl } = req.body;
+
+  createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
       const userId = ref(database, user.uid);
+      const userAuth = auth.currentUser;
+      updateProfile(user, {
+        displayName: username,
+        photoURL: photoUrl
+      })
+      const data = {
+        "password": password,
+        "username": username,
+        "email": email,
+        "photoUrl": photoUrl
+      }
+
       set(userId, data);
       res.send("A new user added!");
       console.log(user);
@@ -27,13 +35,27 @@ export const signUp = async function (req,res){
     });
 }
 
+export const signIn = async function(req,res){
+  const{password, email, username, photoUrl} = req.body;
+  signInWithEmailAndPassword(email, password)
+  .then((userCredential) => {
+    var user = userCredential.user;
+    res.send("Succesfuly logged in!");
+  })
+  .catch((error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    res.send("Erorr Code: " + errorCode + " " + "Error Message: " + errorMessage);
+  });
+}
+
 //export const createUser =  async function(req,res){
 //  const {password, username} = req.body;
 //     const data = {
 //         "password":password,
 //         "username":username
 //     }
-// 
+//
 //     const userId = push(ref(database, "Users"));
 //     set(userId, data);
 //     res.send("A user added");
