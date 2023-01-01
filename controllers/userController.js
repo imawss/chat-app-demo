@@ -31,22 +31,23 @@ export const signUp = async function (req, res) {
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      res.send(errorCode + " " + errorMessage);
+      res.send("Error Code: " + errorCode + " " + "Error Message: " + errorMessage);
     });
 }
 
-export const signIn = async function(req,res){
-  const{password, email, username, photoUrl} = req.body;
-  signInWithEmailAndPassword(email, password)
-  .then((userCredential) => {
-    var user = userCredential.user;
-    res.send("Succesfuly logged in!");
-  })
-  .catch((error) => {
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    res.send("Erorr Code: " + errorCode + " " + "Error Message: " + errorMessage);
-  });
+export const signIn = async function (req, res) {
+  const { password, email } = req.body;
+  const authForLogin = getAuth();
+  signInWithEmailAndPassword(authForLogin, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      res.send("Successfuly logged in!");
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      res.send("Error Code: " + errorCode + " " + "Error Message: " + errorMessage);
+    });
 }
 
 //export const createUser =  async function(req,res){
@@ -72,8 +73,8 @@ export const signIn = async function(req,res){
 //     })
 // }
 
-// export const getAllUsers = async function(req,res){
-//     get(child(dbRef, "Users/")).then(snapshot => {
-//         res.send(snapshot.val());
-//       });
-// }
+export const getAllUsers = async function (req, res) {
+  get(child(dbRef, "Users/")).then(snapshot => {
+    res.send(snapshot.val());
+  });
+}
