@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getDatabase, ref, set, push, child, remove, get, onChildAdded, onChildChanged, onChildRemoved } from 'firebase/database';
-import {  getFirestore, collection, getDocs } from 'firebase/firestore';
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
 
 const base = initializeApp({
     apiKey: "AIzaSyD7Kw-ynvk7p8LzvBmvu2P6w7krcEZuKdM",

@@ -1,8 +1,5 @@
 import { dbRef, database, auth } from '../dataAccess/firebaseConfig.js';
 import { ref, set, push, child, remove, get, onChildAdded, onChildChanged, onChildRemoved } from 'firebase/database';
-import { v4 as uuidv4 } from 'uuid';
-import { getDocs } from 'firebase/firestore';
-import { async } from '@firebase/util';
 import { getAuth, connectAuthEmulator, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 
 export const signUp = async function (req, res) {
