@@ -2,9 +2,12 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getDatabase, ref, set, push, child, remove, get, onChildAdded, onChildChanged, onChildRemoved } from 'firebase/database';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const base = initializeApp({
-    apiKey: "AIzaSyD7Kw-ynvk7p8LzvBmvu2P6w7krcEZuKdM",
+    apiKey: process.env.FIREBASE_API_KEY,
     authDomain: "chat-app-demo-12223.firebaseapp.com",
     databaseURL: "https://chat-app-demo-12223-default-rtdb.firebaseio.com",
     projectId: "chat-app-demo-12223",
