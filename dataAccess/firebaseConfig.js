@@ -8,12 +8,12 @@ dotenv.config();
 
 const base = initializeApp({
     apiKey: process.env.FIREBASE_API_KEY,
-    authDomain: "chat-app-demo-12223.firebaseapp.com",
-    databaseURL: "https://chat-app-demo-12223-default-rtdb.firebaseio.com",
-    projectId: "chat-app-demo-12223",
-    storageBucket: "chat-app-demo-12223.appspot.com",
-    messagingSenderId: "671784459453",
-    appId: "1:671784459453:web:139ed54fe36ea828db6bd4",
+    authDomain: "chatapp-bb289.firebaseapp.com",
+    projectId: "chatapp-bb289",
+    storageBucket: "chatapp-bb289.appspot.com",
+    messagingSenderId: "550254131008",
+    appId: "1:550254131008:web:cd87466ec30f6131a26ca5",
+    measurementId: "G-PEG2KKHRN3"
 });
 
 export const database = getDatabase(base);
