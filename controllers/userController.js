@@ -3,7 +3,7 @@ import { ref, set, push, child, remove, get, onChildAdded, onChildChanged, onChi
 import { getAuth, connectAuthEmulator, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 
 export const signUp = async function (req, res) {
-  const { password, email, username, photoUrl } = req.body;
+  const { password, email, username } = req.body;
 
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
@@ -11,14 +11,12 @@ export const signUp = async function (req, res) {
       const userId = ref(database, user.uid);
       const userAuth = auth.currentUser;
       updateProfile(user, {
-        displayName: username,
-        photoURL: photoUrl
+        displayName: username
       })
       const data = {
         "password": password,
         "username": username,
-        "email": email,
-        "photoUrl": photoUrl
+        "email": email
       }
 
       set(userId, data);
