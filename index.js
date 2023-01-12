@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
-import userManager from "./routes/userManager.js";
+import UserRoute from "./routes/userManager.js";
+import messageRoute from "./routes/messageManagers.js";
 import cors from "cors";
 
 const app = express();
@@ -13,7 +14,8 @@ app.use(cors({
     optionSuccessStatus:200
 }));
 app.use(bodyParser.json());
-app.use('/apiv1', userManager);
+app.use('/apiv1', UserRoute);
+app.use('/apiv1', messageRoute);
 
 app.listen(port, function() {
     console.log("Server is starting! Port number is:" + port);

@@ -7,19 +7,13 @@ export const signUp = async function (req, res) {
 
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      const user = userCredential.user;
-      const userId = ref(database, user.uid);
+      const user = getAuth();
       const userAuth = auth.currentUser;
-      updateProfile(user, {
+      //const userId = ref(database, user.uid);
+      //const userDbPath = ref(database, 'users/'+ user.uid); 
+      updateProfile(user.currentUser, {
         displayName: username
       })
-      const data = {
-        "password": password,
-        "username": username,
-        "email": email
-      }
-
-      set(userId, data);
       res.send("A new user added!");
       console.log(user);
     })
@@ -27,6 +21,7 @@ export const signUp = async function (req, res) {
       const errorCode = error.code;
       const errorMessage = error.message;
       res.send("Error Code: " + errorCode + " " + "Error Message: " + errorMessage);
+      //I need to add realtime db error handler for auth systems!
     });
 }
 
@@ -41,7 +36,7 @@ export const signIn = async function (req, res) {
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      res.send("Error Code: " + errorCode + " " + "Error Message: " + errorMessage);
+      res.send("Error Code: " + errorCode + "!" + "Error Message: " + errorMessage);
     });
 }
 
@@ -69,7 +64,7 @@ export const signIn = async function (req, res) {
 // }
 
 export const getAllUsers = async function (req, res) {
-  get(child(dbRef, "Users/")).then(snapshot => {
+  get(child(dbRef, "users/")).then(snapshot => {
     res.send(snapshot.val());
   });
 }
