@@ -36,7 +36,7 @@ export const signIn = async function (req, res) {
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      res.send("Error Code: " + errorCode + "!" + "Error Message: " + errorMessage);
+      res.send(400, {message:"Error Code: " + errorCode + " " + "Error Message: " + errorMessage});
     });
 }
 
