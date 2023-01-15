@@ -27,3 +27,5 @@ export const getMessages = async function(req,res) {
         res.send(snapshot.val());
       });
 }
+
+//ATTENTION! *WIP*
