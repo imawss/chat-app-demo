@@ -1,9 +1,9 @@
 import express from "express";
 import bodyParser from "body-parser";
-import { gettingTest } from "../controllers/messageController.js";
+import { sendMessage } from "../controllers/messageController.js";
 
 const messageRoute = express.Router();
 
-messageRoute.get('/messages/get', gettingTest);
+messageRoute.post('/messages/send', sendMessage);
 
 export default messageRoute;
