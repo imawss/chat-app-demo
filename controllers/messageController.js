@@ -21,3 +21,9 @@ export const sendMessage = async function(req,res) {
     
     //message id - sender id - message - message creation time 
 }
+
+export const getMessages = async function(req,res) {
+    get(child(dbRef, "messages/")).then(snapshot => {
+        res.send(snapshot.val());
+      });
+}
