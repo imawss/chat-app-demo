@@ -41,7 +41,7 @@ export const signIn = async function (req, res) {
 }
 
 export const getUserAuth = async function (req, res) {
-  const checkedAuth = getAuth();
+  const checkedAuth = getAuth().currentUser;
   onAuthStateChanged(auth, (user) => {
     if (user) {
       res.send("User is valid");
