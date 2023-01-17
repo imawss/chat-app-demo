@@ -9,8 +9,14 @@ export const signUp = async function (req, res) {
     .then((userCredential) => {
       const user = getAuth();
       const userAuth = auth.currentUser;
-      //const userId = ref(database, user.uid);
-      //const userDbPath = ref(database, 'users/'+ user.uid); 
+      const userId = ref(database, user.uid);
+      const userDbPath = ref(database, 'users/'+ userAuth.uid); 
+      const data = {
+        password: password,
+        email: email,
+        username:username,
+      }
+      set(userDbPath, data);
       updateProfile(user.currentUser, {
         displayName: username
       })
