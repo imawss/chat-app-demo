@@ -57,6 +57,12 @@ export const getUserAuth = async function (req, res) {
   });
 }
 
+export const getUserById = function(req,res){
+  get(child(dbRef, `users/${req.params.id}`)).then(snapshot => {
+     res.json(snapshot.val());
+  })
+}
+
 export const getAllUsers = async function (req, res) {
   get(child(dbRef, "users/")).then(snapshot => {
     res.send(snapshot.val());
