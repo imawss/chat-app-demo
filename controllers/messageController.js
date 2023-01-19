@@ -6,12 +6,12 @@ import { uuidv4 } from '@firebase/util';
 export const sendMessage = async function(req,res) {
     const user = getAuth();
     const messageId = uuidv4(); 
-    const senderId = user.currentUser.uid;
+    const senderMail = user.currentUser.email;
     const message  = req.body;
     const messageCreationTime = Date.now();
     const data = {
         messageId : messageId,
-        senderId: senderId,
+        senderMail: senderMail,
         message: message,
         messageCreationTime: messageCreationTime
     };
