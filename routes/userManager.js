@@ -6,7 +6,7 @@ const userRoute = express.Router();
 
 userRoute.get('/users', getAllUsers);
 userRoute.get('/users/getAuth',getUserAuth);
-userRoute.get('/users/:id');
+userRoute.get('/users/getById/:id', getUserById);
 //userRoute.get('/users/:id', getUserById);
 
 userRoute.post('/users/signup', signUp);

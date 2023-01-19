@@ -28,4 +28,9 @@ export const getMessages = async function(req,res) {
       });
 }
 
+export const getMessageById = function(req,res){
+    get(child(dbRef, `messages/${req.params.id}`)).then(snapshot => {
+       res.json(snapshot.val());
+})}
+
 //ATTENTION! *WIP*
